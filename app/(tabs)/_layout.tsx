@@ -6,16 +6,38 @@ import {
   Globe as Globe2,
   User,
 } from 'lucide-react-native';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  Platform,
+  Dimensions,
+  useWindowDimensions,
+} from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
+
+  // Adjust icon size based on screen width
+  const getIconSize = () => {
+    if (width < 375) return 20; // Smaller screens
+    return 24; // Default size
+  };
+
   return (
     <Tabs
       screenOptions={{
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: {
+          ...styles.tabBar,
+          height: Platform.OS === 'ios' ? 90 : 70,
+          paddingBottom: Platform.OS === 'ios' ? insets.bottom : 8,
+          paddingTop: 8,
+        },
         tabBarActiveTintColor: '#0EA5E9',
         tabBarInactiveTintColor: '#64748B',
         headerShown: false,
+        tabBarLabelStyle: styles.tabBarLabel,
+        tabBarIconStyle: { marginBottom: Platform.OS === 'ios' ? 0 : 4 },
       }}
     >
       <Tabs.Screen
@@ -64,8 +86,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
     borderTopColor: '#E2E8F0',
-    paddingBottom: 8,
-    paddingTop: 8,
-    height: 60,
+  },
+  tabBarLabel: {
+    fontSize: Platform.OS === 'ios' ? 11 : 12,
+    fontWeight: '500',
+    marginBottom: Platform.OS === 'ios' ? 5 : 3,
   },
 });
