@@ -1,13 +1,20 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { 
-  DollarSign, 
-  Cloud, 
-  Languages, 
-  Landmark, 
-  FileText, 
-  ArrowRight 
+import {
+  DollarSign,
+  Cloud,
+  Languages,
+  Landmark,
+  FileText,
+  ArrowRight,
 } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 
 const tools = [
   {
@@ -48,6 +55,15 @@ const tools = [
 ];
 
 export default function ToolsScreen() {
+  const router = useRouter();
+
+  const handleToolPress = (toolId: string) => {
+    if (toolId === '1') {
+      router.push('/features/currency-converter');
+    }
+    // Add other tool navigations as needed
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -58,8 +74,17 @@ export default function ToolsScreen() {
 
         <View style={styles.toolsGrid}>
           {tools.map((tool) => (
-            <TouchableOpacity key={tool.id} style={styles.toolCard}>
-              <View style={[styles.iconContainer, { backgroundColor: `${tool.color}15` }]}>
+            <TouchableOpacity
+              key={tool.id}
+              style={styles.toolCard}
+              onPress={() => handleToolPress(tool.id)}
+            >
+              <View
+                style={[
+                  styles.iconContainer,
+                  { backgroundColor: `${tool.color}15` },
+                ]}
+              >
                 <tool.icon size={24} color={tool.color} />
               </View>
               <View style={styles.toolInfo}>

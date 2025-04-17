@@ -1,5 +1,11 @@
 import { Tabs } from 'expo-router';
-import { Compass, Search, Plane, Globe as Globe2, User } from 'lucide-react-native';
+import {
+  Compass,
+  Search,
+  Plane,
+  Globe as Globe2,
+  User,
+} from 'lucide-react-native';
 import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {
@@ -10,12 +16,15 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#0EA5E9',
         tabBarInactiveTintColor: '#64748B',
         headerShown: false,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ size, color }) => <Compass size={size} color={color} />,
+          tabBarIcon: ({ size, color }) => (
+            <Compass size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
