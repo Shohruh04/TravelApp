@@ -60,6 +60,8 @@ export default function ToolsScreen() {
   const handleToolPress = (toolId: string) => {
     if (toolId === '1') {
       router.push('/features/currency-converter');
+    } else if (toolId === '2') {
+      router.push('/features/weather-forecast');
     }
     // Add other tool navigations as needed
   };
