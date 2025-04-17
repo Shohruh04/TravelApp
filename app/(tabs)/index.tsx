@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MapPin, Star } from 'lucide-react-native';
 
@@ -41,19 +48,38 @@ const trending = [
 ];
 
 export default function ExploreScreen() {
+  const getGreeting = () => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 5 && currentHour < 12) {
+      return 'Good Morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Good Morning</Text>
+          <Text style={styles.greeting}>{getGreeting()}</Text>
           <Text style={styles.name}>Shohruh</Text>
         </View>
 
         <Text style={styles.sectionTitle}>Popular Destinations</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScroll}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.horizontalScroll}
+        >
           {popularDestinations.map((item) => (
             <TouchableOpacity key={item.id} style={styles.destinationCard}>
-              <Image source={{ uri: item.image }} style={styles.destinationImage} />
+              <Image
+                source={{ uri: item.image }}
+                style={styles.destinationImage}
+              />
               <View style={styles.cardContent}>
                 <Text style={styles.hotelName}>{item.name}</Text>
                 <View style={styles.locationContainer}>
@@ -65,7 +91,10 @@ export default function ExploreScreen() {
                     <Star size={14} color="#FBC02D" />
                     <Text style={styles.ratingText}>{item.rating}</Text>
                   </View>
-                  <Text style={styles.price}>${item.price}<Text style={styles.perNight}>/night</Text></Text>
+                  <Text style={styles.price}>
+                    ${item.price}
+                    <Text style={styles.perNight}>/night</Text>
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -76,7 +105,10 @@ export default function ExploreScreen() {
         <View style={styles.trendingGrid}>
           {trending.map((item) => (
             <TouchableOpacity key={item.id} style={styles.trendingCard}>
-              <Image source={{ uri: item.image }} style={styles.trendingImage} />
+              <Image
+                source={{ uri: item.image }}
+                style={styles.trendingImage}
+              />
               <View style={styles.trendingContent}>
                 <Text style={styles.hotelName}>{item.name}</Text>
                 <View style={styles.locationContainer}>
@@ -88,7 +120,10 @@ export default function ExploreScreen() {
                     <Star size={14} color="#FBC02D" />
                     <Text style={styles.ratingText}>{item.rating}</Text>
                   </View>
-                  <Text style={styles.price}>${item.price}<Text style={styles.perNight}>/night</Text></Text>
+                  <Text style={styles.price}>
+                    ${item.price}
+                    <Text style={styles.perNight}>/night</Text>
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
