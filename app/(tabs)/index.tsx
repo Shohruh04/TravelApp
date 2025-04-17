@@ -5,9 +5,11 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MapPin, Star } from 'lucide-react-native';
+import { MapPin, Star, Search, Calendar, Clock } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 
 const popularDestinations = [
   {
@@ -48,6 +50,7 @@ const trending = [
 ];
 
 export default function ExploreScreen() {
+  const router = useRouter();
   const getGreeting = () => {
     const currentHour = new Date().getHours();
 
@@ -67,6 +70,25 @@ export default function ExploreScreen() {
           <Text style={styles.greeting}>{getGreeting()}</Text>
           <Text style={styles.name}>Shohruh</Text>
         </View>
+
+        <View style={styles.searchContainer}>
+          <View style={styles.searchBar}>
+            <Search size={20} color="#64748B" style={styles.searchIcon} />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search destinations, hotels"
+              placeholderTextColor="#64748B"
+            />
+          </View>
+        </View>
+
+        <TouchableOpacity
+          style={styles.bookingsButton}
+          onPress={() => router.push('/page/bookings')}
+        >
+          <Calendar size={20} color="#FFFFFF" />
+          <Text style={styles.bookingsButtonText}>My Bookings</Text>
+        </TouchableOpacity>
 
         <Text style={styles.sectionTitle}>Popular Destinations</Text>
         <ScrollView
@@ -246,5 +268,46 @@ const styles = StyleSheet.create({
   },
   trendingContent: {
     padding: 16,
+  },
+  searchContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 16,
+  },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    height: 50,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  searchIcon: {
+    marginRight: 12,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#0F172A',
+  },
+  bookingsButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0EA5E9',
+    borderRadius: 12,
+    padding: 16,
+    marginHorizontal: 20,
+    marginBottom: 16,
+  },
+  bookingsButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+    marginLeft: 8,
   },
 });
