@@ -46,7 +46,7 @@ export default function ExploreScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text style={styles.greeting}>Good Morning</Text>
-          <Text style={styles.name}>John Doe</Text>
+          <Text style={styles.name}>Shohruh</Text>
         </View>
 
         <Text style={styles.sectionTitle}>Popular Destinations</Text>

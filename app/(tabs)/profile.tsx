@@ -41,8 +41,8 @@ export default function ProfileScreen() {
               style={styles.avatar}
             />
             <View style={styles.nameContainer}>
-              <Text style={styles.name}>John Doe</Text>
-              <Text style={styles.email}>john.doe@example.com</Text>
+              <Text style={styles.name}>Shohruh</Text>
+              <Text style={styles.email}>shohruhqudratullaev2455@gmail.com</Text>
             </View>
           </View>
         </View>
