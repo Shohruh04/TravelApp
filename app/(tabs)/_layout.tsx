@@ -6,23 +6,11 @@ import {
   Globe as Globe2,
   User,
 } from 'lucide-react-native';
-import {
-  StyleSheet,
-  Platform,
-  Dimensions,
-  useWindowDimensions,
-} from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
-  const { width } = useWindowDimensions();
-
-  // Adjust icon size based on screen width
-  const getIconSize = () => {
-    if (width < 375) return 20; // Smaller screens
-    return 24; // Default size
-  };
 
   return (
     <Tabs
