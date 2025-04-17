@@ -110,7 +110,7 @@ export default function TranslatorScreen() {
     setTranslatedText('');
   };
 
-  const getLanguageName = (code) => {
+  const getLanguageName = (code: string) => {
     const language = languageOptions.find((lang) => lang.code === code);
     return language ? language.name : code;
   };
