@@ -8,8 +8,18 @@ import {
   TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MapPin, Star, Search, Calendar, Clock } from 'lucide-react-native';
+import {
+  MapPin,
+  Star,
+  Search,
+  Calendar,
+  Clock,
+  ArrowRight,
+} from 'lucide-react-native';
 import { useRouter } from 'expo-router';
+import axios from 'axios';
+import { useState } from 'react';
+import '../page/hotel-details';
 
 const popularDestinations = [
   {
@@ -51,6 +61,8 @@ const trending = [
 
 export default function ExploreScreen() {
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+
   const getGreeting = () => {
     const currentHour = new Date().getHours();
 
@@ -60,6 +72,15 @@ export default function ExploreScreen() {
       return 'Good Afternoon';
     } else {
       return 'Good Evening';
+    }
+  };
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      router.push({
+        pathname: '/page/hotel-search',
+        params: { query: searchQuery },
+      });
     }
   };
 
@@ -76,11 +97,22 @@ export default function ExploreScreen() {
             <Search size={20} color="#64748B" style={styles.searchIcon} />
             <TextInput
               style={styles.searchInput}
-              placeholder="Search destinations, hotels"
+              placeholder="Search hotels or destinations"
               placeholderTextColor="#64748B"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              onSubmitEditing={handleSearch}
             />
           </View>
         </View>
+
+        <TouchableOpacity
+          style={styles.hotelsButton}
+          onPress={() => router.push('/page/hotel-search')}
+        >
+          <Search size={20} color="#FFFFFF" />
+          <Text style={styles.hotelsButtonText}>Find Hotels</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.bookingsButton}
@@ -305,6 +337,22 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   bookingsButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+    marginLeft: 8,
+  },
+  hotelsButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#22C55E',
+    borderRadius: 12,
+    padding: 16,
+    marginHorizontal: 20,
+    marginBottom: 16,
+  },
+  hotelsButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
