@@ -62,6 +62,8 @@ export default function ToolsScreen() {
       router.push('/features/currency-converter');
     } else if (toolId === '2') {
       router.push('/features/weather-forecast');
+    } else if (toolId === '3') {
+      router.push('/features/translator');
     }
     // Add other tool navigations as needed
   };
